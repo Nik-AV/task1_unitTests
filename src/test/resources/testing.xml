@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="PenTestSuite" verbose="1" >
+    <test name="PenTest">
+        <classes>
+            <class name="somethingElseTest"/>
+            <class name="writeTest"/>
+            <class name="getColorTest"/>
+        </classes>
+    </test>
+</suite>
