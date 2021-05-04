@@ -1,32 +1,25 @@
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
 
 public class writeTest {
 
-    private Pen pen1, pen2, pen3, pen4;
+    @Test (dataProvider = "isWorkSet", dataProviderClass = TestDataProvider.class)
+    public void tesIsWork(Pen pen, boolean expectedResult) {
 
-    @BeforeMethod
-    public void setUp() {
-
-        pen1 = new Pen(10, 1.0, "Red");
-        pen2 = new Pen(3, 2);
-        pen3 = new Pen(3);
-        pen4 = new Pen(0);
-
+        Assert.assertEquals(pen.isWork().booleanValue(), expectedResult);
     }
 
-    @Test
-    public void testWrite() {
+    @Test (dataProvider = "writePositiveSet", dataProviderClass = TestDataProvider.class)
+    public void testPositiveWrite(Pen pen, String inputString, String expectedResult) {
 
-        assertEquals(pen1.write("qwertyuiop"), "qwertyuiop");
-        assertEquals(pen2.write("abcd"), "abc");
-        assertEquals(pen2.write("123"), "");
-        assertEquals(pen3.write(""), "");
-        assertEquals(pen3.write("zxcvbn"), "zxc");
-        assertEquals(pen4.write("zxc"), "");
-
+        Assert.assertEquals(pen.write(inputString), expectedResult);
     }
+
+    @Test (dataProvider = "writeNegativeSet", dataProviderClass = TestDataProvider.class)
+    public void testNegativWrite(Pen pen, String inputString, String expectedResult) {
+
+        Assert.assertEquals(pen.write(inputString), expectedResult);
+    }
+
 }
